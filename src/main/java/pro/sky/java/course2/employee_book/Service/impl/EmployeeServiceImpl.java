@@ -8,12 +8,18 @@ import pro.sky.java.course2.employee_book.Service.EmployeeService;
 import pro.sky.java.course2.employee_book.data.Employee;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private final List<Employee> employees = new ArrayList<>();
+    private final List<Employee> employees;
+
+    public EmployeeServiceImpl() {
+        this.employees = new ArrayList<>();
+    }
 
     @Override
     public String greetings() {
@@ -21,7 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public String add(String firstName, String lastName, String middleName) {
+    public Employee add(String firstName, String lastName, String middleName) {
         Employee employee = new Employee(firstName, lastName, middleName);
         if (employees.contains(employee)) {
             throw new EmployeeExist();
@@ -30,29 +36,29 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new EmployeesIsFull();
         }
         employees.add(employee);
-        return "Сотрудник " + employee + " - добавлен";
+        return employee;
     }
 
     @Override
-    public String remove(String firstName, String lastName, String middleName) {
+    public Employee remove(String firstName, String lastName, String middleName) {
         Employee employee = new Employee(firstName, lastName, middleName);
         if (employees.remove(employee)) {
-            return "Сотрудник " + employee.getEmployeeFullName() + " - удален";
+            return employee;
         }
         throw new EmployeeNotFound();
     }
 
     @Override
-    public String find(String firstName, String lastName, String middleName) {
+    public Employee find(String firstName, String lastName, String middleName) {
         Employee employee = new Employee(firstName, lastName, middleName);
         if (employees.contains(employee)) {
-            return "Сотрудник " + employee.getEmployeeFullName() + " - найден";
+            return employee;
         }
         throw new EmployeeNotFound();
     }
 
     @Override
-    public List<Employee> printAllEmployees() {
-        return employees;
+    public Collection<Employee> printAllEmployees() {
+        return Collections.unmodifiableList(employees);
     }
 }

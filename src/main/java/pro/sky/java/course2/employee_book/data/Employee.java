@@ -14,15 +14,25 @@ public class Employee {
         this.employeeMiddleName = middleName;
     }
 
-    public String getEmployeeFullName() {
-        return employeeLastName +
-                " " + employeeFirstName +
-                " " + employeeMiddleName;
+    public String getEmployeeFirstName() {
+        return employeeFirstName;
+    }
+
+    public String getEmployeeLastName() {
+        return employeeLastName;
+    }
+
+    public String getEmployeeMiddleName() {
+        return employeeMiddleName;
     }
 
     @Override
     public String toString() {
-        return getEmployeeFullName();
+        return "Employee{" +
+                "employeeFirstName='" + getEmployeeFirstName() + '\'' +
+                ", employeeLastName='" + getEmployeeLastName() + '\'' +
+                ", employeeMiddleName='" + getEmployeeMiddleName() + '\'' +
+                '}';
     }
 
     @Override

@@ -2,17 +2,17 @@ package pro.sky.java.course2.employee_book.Service;
 
 import pro.sky.java.course2.employee_book.data.Employee;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface EmployeeService {
 
     String greetings();
 
-    String add(String firstName, String lastName, String middleName);
+    Employee add(String firstName, String lastName, String middleName);
 
-    String remove(String firstName, String lastName, String middleName);
+    Employee remove(String firstName, String lastName, String middleName);
 
-    String find(String firstName, String lastName, String middleName);
+    Employee find(String firstName, String lastName, String middleName);
 
-    List<Employee> printAllEmployees();
+    Collection<Employee> printAllEmployees();
 }
