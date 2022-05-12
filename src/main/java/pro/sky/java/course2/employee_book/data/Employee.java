@@ -40,7 +40,7 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return employeeFirstName.equals(employee.employeeFirstName)
+        return getEmployeeMiddleName().equals(employee.employeeFirstName)
                 && employeeLastName.equals(employee.employeeLastName)
                 && employeeMiddleName.equals(employee.employeeMiddleName);
     }

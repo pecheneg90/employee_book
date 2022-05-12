@@ -39,8 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee remove(String firstName, String lastName, String middleName) {
         Employee employee = new Employee(firstName, lastName, middleName);
         if (employees.containsKey(firstName + lastName + middleName)) {
-            employees.remove(firstName + lastName + middleName, employee);
-            return employee;
+            return employees.remove(firstName + lastName + middleName);
         }
         throw new EmployeeNotFound();
     }
@@ -49,7 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee find(String firstName, String lastName, String middleName) {
         Employee employee = new Employee(firstName, lastName, middleName);
         if (employees.containsKey(firstName + lastName + middleName)) {
-            return employee;
+            return employees.get(firstName+lastName+middleName);
         }
         throw new EmployeeNotFound();
     }
