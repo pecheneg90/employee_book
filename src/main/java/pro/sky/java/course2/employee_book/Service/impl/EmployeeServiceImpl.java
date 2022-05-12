@@ -7,19 +7,15 @@ import pro.sky.java.course2.employee_book.Exception.EmployeesIsFull;
 import pro.sky.java.course2.employee_book.Service.EmployeeService;
 import pro.sky.java.course2.employee_book.data.Employee;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private final List<Employee> employees;
-
-    public EmployeeServiceImpl() {
-        this.employees = new ArrayList<>();
-    }
+    private final Map<String, Employee> employees = new HashMap<>();
 
     @Override
     public String greetings() {
@@ -29,20 +25,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee add(String firstName, String lastName, String middleName) {
         Employee employee = new Employee(firstName, lastName, middleName);
-        if (employees.contains(employee)) {
+        if (employees.containsKey(lastName + firstName + middleName)) {
             throw new EmployeeExist();
         }
         if (employees.size() == 3) {
             throw new EmployeesIsFull();
         }
-        employees.add(employee);
+        employees.put(firstName + lastName + middleName, employee);
         return employee;
     }
 
     @Override
     public Employee remove(String firstName, String lastName, String middleName) {
         Employee employee = new Employee(firstName, lastName, middleName);
-        if (employees.remove(employee)) {
+        if (employees.containsKey(firstName + lastName + middleName)) {
+            employees.remove(firstName + lastName + middleName, employee);
             return employee;
         }
         throw new EmployeeNotFound();
@@ -51,7 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee find(String firstName, String lastName, String middleName) {
         Employee employee = new Employee(firstName, lastName, middleName);
-        if (employees.contains(employee)) {
+        if (employees.containsKey(firstName + lastName + middleName)) {
             return employee;
         }
         throw new EmployeeNotFound();
@@ -59,6 +56,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Collection<Employee> printAllEmployees() {
-        return Collections.unmodifiableList(employees);
+        return Collections.unmodifiableCollection(employees.values());
     }
 }
