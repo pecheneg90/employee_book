@@ -7,6 +7,8 @@ public class Employee {
     String employeeFirstName;
     String employeeLastName;
     String employeeMiddleName;
+    double salaryMonth;
+    int department;
 
     public Employee(String firstName, String lastName, String middleName) {
         this.employeeFirstName = firstName;
