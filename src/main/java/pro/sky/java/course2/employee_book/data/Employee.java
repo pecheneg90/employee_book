@@ -10,30 +10,36 @@ public class Employee {
     double salaryMonth;
     int department;
 
-    public Employee(String firstName, String lastName, String middleName) {
+    public double getSalaryMonth() {
+        return salaryMonth;
+    }
+
+    public int getDepartment() {
+        return department;
+    }
+
+    public Employee(String firstName, String lastName, String middleName, int department, double salaryMonth) {
         this.employeeFirstName = firstName;
         this.employeeLastName = lastName;
         this.employeeMiddleName = middleName;
+        this.department = department;
+        this.salaryMonth = salaryMonth;
     }
 
-    public String getEmployeeFirstName() {
-        return employeeFirstName;
-    }
-
-    public String getEmployeeLastName() {
-        return employeeLastName;
-    }
-
-    public String getEmployeeMiddleName() {
-        return employeeMiddleName;
+    public String getFullName() {
+        return employeeFirstName + " "
+                + employeeLastName + " "
+                + employeeMiddleName;
     }
 
     @Override
     public String toString() {
         return "Employee{" +
-                ", employeeFirstName='" + getEmployeeFirstName() + '\'' +
-                ", employeeLastName='" + getEmployeeLastName() + '\'' +
-                ", employeeMiddleName='" + getEmployeeMiddleName() + '\'' +
+                "employeeFirstName='" + employeeFirstName + '\'' +
+                ", employeeLastName='" + employeeLastName + '\'' +
+                ", employeeMiddleName='" + employeeMiddleName + '\'' +
+                ", salaryMonth=" + salaryMonth +
+                ", department=" + department +
                 '}';
     }
 
@@ -42,13 +48,11 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return getEmployeeMiddleName().equals(employee.employeeFirstName)
-                && employeeLastName.equals(employee.employeeLastName)
-                && employeeMiddleName.equals(employee.employeeMiddleName);
+        return Double.compare(employee.salaryMonth, salaryMonth) == 0 && department == employee.department && employeeFirstName.equals(employee.employeeFirstName) && employeeLastName.equals(employee.employeeLastName) && employeeMiddleName.equals(employee.employeeMiddleName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(employeeFirstName, employeeLastName, employeeMiddleName);
+        return Objects.hash(employeeFirstName, employeeLastName, employeeMiddleName, salaryMonth, department);
     }
 }

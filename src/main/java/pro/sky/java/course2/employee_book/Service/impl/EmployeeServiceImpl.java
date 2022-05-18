@@ -23,32 +23,35 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee add(String firstName, String lastName, String middleName) {
-        Employee employee = new Employee(firstName, lastName, middleName);
-        if (employees.containsKey(lastName + firstName + middleName)) {
+    public Employee add(String firstName, String lastName, String middleName,
+                        int department, double salaryMonth) {
+        Employee employee = new Employee(firstName, lastName, middleName, department, salaryMonth);
+        if (employees.containsKey(employee.getFullName())) {
             throw new EmployeeExist();
         }
-        if (employees.size() == 3) {
+        if (employees.size() == 10) {
             throw new EmployeesIsFull();
         }
-        employees.put(firstName + lastName + middleName, employee);
+        employees.put(employee.getFullName(), employee);
         return employee;
     }
 
     @Override
-    public Employee remove(String firstName, String lastName, String middleName) {
-        Employee employee = new Employee(firstName, lastName, middleName);
-        if (employees.containsKey(firstName + lastName + middleName)) {
-            return employees.remove(firstName + lastName + middleName);
+    public Employee remove(String firstName, String lastName, String middleName,
+                           int department, double salaryMonth) {
+        Employee employee = new Employee(firstName, lastName, middleName, department, salaryMonth);
+        if (employees.containsKey(employee.getFullName())) {
+            return employees.remove(employee.getFullName());
         }
         throw new EmployeeNotFound();
     }
 
     @Override
-    public Employee find(String firstName, String lastName, String middleName) {
-        Employee employee = new Employee(firstName, lastName, middleName);
-        if (employees.containsKey(firstName + lastName + middleName)) {
-            return employees.get(firstName+lastName+middleName);
+    public Employee find(String firstName, String lastName, String middleName,
+                         int department, double salaryMonth) {
+        Employee employee = new Employee(firstName, lastName, middleName, department, salaryMonth);
+        if (employees.containsKey(employee.getFullName())) {
+            return employees.get(employee.getFullName());
         }
         throw new EmployeeNotFound();
     }
