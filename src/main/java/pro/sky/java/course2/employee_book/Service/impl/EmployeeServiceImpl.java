@@ -29,7 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (employees.containsKey(employee.getFullName())) {
             throw new EmployeeExist();
         }
-        if (employees.size() == 10) {
+        if (employees.size() == 5) {
             throw new EmployeesIsFull();
         }
         employees.put(employee.getFullName(), employee);
