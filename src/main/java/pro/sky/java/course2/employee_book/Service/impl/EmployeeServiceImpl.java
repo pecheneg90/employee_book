@@ -1,5 +1,6 @@
 package pro.sky.java.course2.employee_book.Service.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import pro.sky.java.course2.employee_book.Exception.EmployeeExist;
 import pro.sky.java.course2.employee_book.Exception.EmployeeNotFound;
@@ -25,8 +26,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee add(String firstName, String lastName, String middleName,
                         int department, double salaryMonth) {
-        Employee employee = new Employee(firstName, lastName, middleName, department, salaryMonth);
+        Employee employee = new Employee(
+                StringUtils.capitalize(firstName),
+                StringUtils.capitalize(lastName),
+                StringUtils.capitalize(middleName),
+                department, salaryMonth);
         if (employees.containsKey(employee.getFullName())) {
+            throw new EmployeeExist();
+        }
+        if (StringUtils.isNumeric(firstName)
+                || StringUtils.isNumeric(lastName)
+                || StringUtils.isNumeric(middleName)) {
             throw new EmployeeExist();
         }
         if (employees.size() == 5) {
