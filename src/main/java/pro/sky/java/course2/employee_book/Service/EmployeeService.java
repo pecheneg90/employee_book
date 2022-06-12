@@ -8,11 +8,14 @@ public interface EmployeeService {
 
     String greetings();
 
-    Employee add(String firstName, String lastName, String middleName);
+    Employee add(String firstName, String lastName, String middleName,
+                 int department, double salaryMonth);
 
-    Employee remove(String firstName, String lastName, String middleName);
+    Employee remove(String firstName, String lastName, String middleName,
+                    int department, double salaryMonth);
 
-    Employee find(String firstName, String lastName, String middleName);
+    Employee find(String firstName, String lastName, String middleName,
+                  int department, double salaryMonth);
 
     Collection<Employee> printAllEmployees();
 }
