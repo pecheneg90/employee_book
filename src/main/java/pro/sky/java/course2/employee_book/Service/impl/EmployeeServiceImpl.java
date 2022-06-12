@@ -39,7 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 || StringUtils.isNumeric(middleName)) {
             throw new EmployeeExist();
         }
-        if (employees.size() == 5) {
+        if (employees.size() == 2) {
             throw new EmployeesIsFull();
         }
         employees.put(employee.getFullName(), employee);
